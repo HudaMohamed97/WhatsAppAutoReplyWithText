@@ -3,30 +3,19 @@ package com.autoai.readnotification.models;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.RemoteInput;
-import android.util.Base64;
-import android.util.Log;
-
-import com.autoai.readnotification.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Action implements Parcelable {
-
     private final String text;
     private final String packageName;
     private final PendingIntent p;
     private final boolean isQuickReply;
-    Map<String, Uri> map = new HashMap<>();
     private final ArrayList<RemoteInputParcel> remoteInputs = new ArrayList<>();
 
     public Action(Parcel in) {
@@ -58,20 +47,12 @@ public class Action implements Parcelable {
         this.isQuickReply = isQuickReply;
     }
 
-    public void sendReply(Context context, String msg) throws PendingIntent.CanceledException {
+    public void sendReply(Context context, String number) throws PendingIntent.CanceledException {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         ArrayList<RemoteInput> actualInputs = new ArrayList<>();
         for (RemoteInputParcel input : remoteInputs) {
-
-            Uri uri = Uri.parse("android.resource://com.autoai.readnotification.models/drawable/dummy_icon");
-
-            //Bitmap image4 = BitmapFactory.decodeResource(context.getResources(), R.drawable.dummy_icon);
-            // bundle.putParcelable(input.getResultKey(), image4);
-            //intent.putExtra(input.getResultKey(), "massage");
-            bundle.putCharSequence(input.getResultKey(), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg");
-            //bundle.putBundle(input.getResultKey(), bundle);
-            map.put(input.getResultKey(), uri);
+            bundle.putString(input.getResultKey(), "Hi");
             RemoteInput.Builder builder = new RemoteInput.Builder(input.getResultKey());
             builder.setLabel(input.getLabel());
             builder.setChoices(input.getChoices());
@@ -118,5 +99,4 @@ public class Action implements Parcelable {
             return new Action[size];
         }
     };
-
 }

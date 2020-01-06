@@ -52,13 +52,13 @@ public class NotificationUtils {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static String getMessage(Bundle extras) {
-        Log.d("Text", "" + extras.getCharSequence(Notification.EXTRA_TEXT));
-        Log.d("Big Text", "" + extras.getCharSequence(Notification.EXTRA_BIG_TEXT));
-        Log.d("Title Big", "" + extras.getCharSequence(Notification.EXTRA_TITLE_BIG));
-        Log.d("Info text", "" + extras.getCharSequence(Notification.EXTRA_INFO_TEXT));
-        Log.d("Info text", "" + extras.getCharSequence(Notification.EXTRA_INFO_TEXT));
-        Log.d("Subtext", "" + extras.getCharSequence(Notification.EXTRA_SUB_TEXT));
-        Log.d("Summary", "" + extras.getString(Notification.EXTRA_SUMMARY_TEXT));
+        /*Log.i("hhh", "Text" + extras.getCharSequence(Notification.EXTRA_TEXT));
+        Log.i("hhh", "Big Text" + extras.getCharSequence(Notification.EXTRA_BIG_TEXT));
+        Log.i("hhh", "Title Big" + extras.getCharSequence(Notification.EXTRA_TITLE_BIG));
+        Log.i("hhh", "Info text" + extras.getCharSequence(Notification.EXTRA_INFO_TEXT));
+        Log.i("hhh", "Info text" + extras.getCharSequence(Notification.EXTRA_INFO_TEXT));
+        Log.i("hhh", "Subtext" + extras.getCharSequence(Notification.EXTRA_SUB_TEXT));
+        Log.i("hhh", "Summary" + extras.getString(Notification.EXTRA_SUMMARY_TEXT));*/
         CharSequence chars = extras.getCharSequence(Notification.EXTRA_TEXT);
         if (!TextUtils.isEmpty(chars))
             return chars.toString();
@@ -171,7 +171,6 @@ public class NotificationUtils {
     private static boolean isKnownReplyKey(String resultKey) {
         if (TextUtils.isEmpty(resultKey))
             return false;
-
         resultKey = resultKey.toLowerCase();
         for (String keyword : REPLY_KEYWORDS)
             if (resultKey.contains(keyword))
